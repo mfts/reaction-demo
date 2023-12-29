@@ -1,14 +1,12 @@
-# vercel/gauge
+# loom/reactions
 
-This is the open-source Tailwindcss version of Vercel's beautiful Gauge React component to indicate a status.
+This is the open-source Tailwindcss version of Looms's beautiful Emoji Toolbar React component to react to anything.
 
-![gauge demo image](.github/img/demo.png)
+![reaction demo image](.github/img/demo.gif)
+
 ## Demo
 
-View the demo here: https://gauge-demo.vercel.app
-
-View the original Vercel design system here: [Gauge](https://vercel.com/design/gauge)
-
+View the demo here: https://reaction-demo.vercel.app
 
 ## Installation
 
@@ -17,20 +15,20 @@ View the original Vercel design system here: [Gauge](https://vercel.com/design/g
 - `tailwindcss`
 - `tailwindcss-animate`
 
-
 It's pretty easy to install. I made it a standalone component that you can copy in your codebase.
 
-1. Copy the `gauge` component
+1. Copy the `toolbar` component
+
    ```sh
-   cp ./app/gauge.tsx your-project/components/gauge.tsx
+   cp ./app/toolbar.tsx your-project/components/toolbar.tsx
    ```
 
-   or go directly to it here: [gauge.tsx](https://github.com/mfts/gauge-demo/blob/main/app/gauge.tsx)
-   
+   or go directly to it here: [toolbar.tsx](https://github.com/mfts/reaction-demo/blob/main/app/toolbar.tsx)
 
 2. Add keyframes and animation to your `tailwind.config.ts`
+
    ```ts
-   import type { Config } from 'tailwindcss'
+   import type { Config } from "tailwindcss";
 
    const config: Config = {
      content: [
@@ -39,55 +37,96 @@ It's pretty easy to install. I made it a standalone component that you can copy 
        "./app/**/*.{js,ts,jsx,tsx,mdx}",
      ],
      theme: {
+       fontFamily: {
+         emoji: [
+           "Twemoji Mozilla",
+           "Apple Color Emoji",
+           "Noto Color Emoji",
+           "Segoe UI Emoji",
+           "Segoe UI Symbol",
+           "Segoe UI",
+           "EmojiOne Color",
+           "Android Emoji",
+         ],
+       },
        extend: {
          keyframes: {
-           gauge_fadeIn: {
-             from: { opacity: "0" },
-             to: { opacity: "1" },
-           },
-           gauge_fill: {
-             from: { "stroke-dashoffset": "332", opacity: "0" },
-             to: { opacity: "1" },
+           flyEmoji: {
+             "0%": {
+               transform: "translateY(0) scale(1)",
+               opacity: "0.7",
+             },
+             "100%": {
+               transform: "translateY(-150px) scale(2)",
+               opacity: "0",
+             },
            },
          },
          animation: {
-           gauge_fadeIn: "gauge_fadeIn 1s ease forwards",
-           gauge_fill: "gauge_fill 1s ease forwards",
+           flyEmoji: "flyEmoji 1s forwards",
          },
        },
      },
      plugins: [require("tailwindcss-animate")],
    };
-   export default config
-
+   export default config;
    ```
 
 3. Import into your page
+
    ```ts
-   import { Gauge } from "@/components/gauge";
+   import { Toolbar } from "@/components/toolbar";
 
    export default function Home() {
      return (
-      <>
-        // ...
-        <Gauge value={80} size="small" showValue={true} />
-        // ...
-      </>
-     )
+       <>
+         // ...
+         <Toolbar />
+         // ...
+       </>
+     );
    }
    ```
 
+4. Change the emojis in the `REACTIONS` object in `toolbar.tsx`
 
-## API
+   ```tsx
+   // ...
+   const REACTIONS = [
+     {
+       emoji: "😂",
+       label: "joy",
+     },
+     {
+       emoji: "😍",
+       label: "love",
+     },
+     {
+       emoji: "😮",
+       label: "wow",
+     },
+     {
+       emoji: "🙌",
+       label: "yay",
+     },
+     {
+       emoji: "👍",
+       label: "up",
+     },
+     {
+       emoji: "👎",
+       label: "down",
+     },
+   ];
+   ```
 
-The `Gauge` component takes three props: `value`, `size`, `showValue`.
+## Future Ideas
 
-- `value`: a **number** from `0` to `100`
-- `size`: a **string** ("small", "medium", "large"). Defaults to: `"small"`
-- `showValue`: a **boolean** to show the number inside the gauge or not. Defaults to: `true`
-
+- `onClick` handler
+- `size` prop to adjust the size of the toolbar
+- dark mode support
 
 ## Inspiration
 
-- Thanks to the [@vercel](https://x.com/vercel) design team for the awesome component.
+- Thanks to the [@loom](https://x.com/loom) design team for the awesome component.
 - Thanks to [@shadcn](https://x.com/shadcn) who gave me a new joy for UI design.
