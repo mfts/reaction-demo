@@ -1,5 +1,5 @@
-import { Toolbar } from './toolbar'
-import Link from 'next/link';
+import { Toolbar } from "./toolbar";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -13,15 +13,14 @@ export default function Home() {
             className="pointer-events-none flex place-items-center text-white gap-2 p-8 lg:pointer-events-auto lg:p-0"
             href="https://x.com/mfts0"
             target="_blank"
-            rel="noopener noreferrer"
-          >
-            By @mfts0
+            rel="noopener noreferrer">
+            by @mfts0
           </a>
         </div>
       </div>
 
       <div className="relative flex flex-col gap-y-4 sm:gap-x-8 sm:flex-row items-center">
-        
+        <Toolbar />
       </div>
 
       <div className="flex flex-col gap-y-4 items-center justify-center text-center mb-20">
@@ -29,8 +28,7 @@ export default function Home() {
           href="https://github.com/mfts/reaction-demo"
           className="p-4 border border-neutral-800 bg-zinc-800/30 rounded-xl hover:bg-gray-900 infline-flex items-center gap-x-2 mt-4 text-white"
           target="_blank"
-          rel="noopener noreferrer"
-        >
+          rel="noopener noreferrer">
           Get the component on GitHub
         </Link>
       </div>
